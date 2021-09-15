@@ -1,8 +1,11 @@
 {
   "name": "apirajawalinew",
   "version": "1.0.0",
-  "description": "",
+  "description": "Api Registrasi dan Login ",
   "main": "index.js",
+  "engines": {
+    "node": "14.17.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
