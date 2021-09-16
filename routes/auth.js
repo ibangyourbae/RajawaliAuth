@@ -28,6 +28,7 @@ router.post('/register',async(req,res) => {
     // Create a new user
     const user = new User({
         name: req.body.name,
+        username: req.body.username,
         email: req.body.email,
         password: hashedPassword
     })
@@ -37,6 +38,8 @@ router.post('/register',async(req,res) => {
             user: user._id,
             "message": "Register user berhasil",
             body:{
+                "name": req.body.name,
+                "username": req.body.username,
                 "email": req.body.email,
                 "password": hashedPassword
             }
