@@ -4,9 +4,7 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3000
 const cors = require('cors')
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
-header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With')
+
 
 dotenv.config()
 // Import Routes
@@ -23,9 +21,14 @@ mongoose.connect(process.env.DB_CONNECT,
 
 // Middleware
 app.use(express.json())
-
-// Route Middlewares
 app.use(cors())
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+// Route Middlewares
+
 app.use('/api/user', authRoute)
 app.use('/api/posts', postRoute)
 
