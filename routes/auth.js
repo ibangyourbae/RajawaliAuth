@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const { route } = require('express/lib/application')
 const User = require('../model/User')
 const {registerValidation, loginValidation} = require('../routes/validation')
+const { has } = require('@hapi/joi/lib/types/array')
+const { valid } = require('@hapi/joi')
 
 // REGISTER
 router.post('/register',async(req,res) => {
@@ -31,7 +33,15 @@ router.post('/register',async(req,res) => {
     })
     try{
         const savedUser = await user.save()
-        res.send({user: user._id})
+        res.send({
+            user: user._id,
+            "message": "Register user berhasil",
+            body:{
+                "email": req.body.email,
+                "password": hashedPassword
+            }
+
+        })
     }catch(err){
         res.status(400).send(err)
     }
@@ -41,6 +51,7 @@ router.post('/register',async(req,res) => {
 router.post('/login', async(req,res) =>{
 
     // VALIDATE USER DATA
+    
     
     const {error} = loginValidation(req.body)
     if(error) return res.status(400).send(error.details[0].message)
@@ -58,9 +69,19 @@ router.post('/login', async(req,res) =>{
 
         // Create and assign a token
         const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
-        res.header('auth-token', token).send(token)
+        // res.header('auth-token', token).send(token)
+        res.send({
+            user:user._id,
+            "message":"Berhasil Login",
+            body:{
+                "email": req.body.email,
+                "password": true
+            },
+            'auth-token': token
+        })
+              
 
 
-        res.send('Logged in')
+        console.log('Logged in')
 })
 module.exports = router
