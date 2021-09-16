@@ -80,9 +80,11 @@ router.post('/login', async(req,res) =>{
         res.send({
             user:user._id,
             "message":"Berhasil Login",
-            body:{
-                "email": req.body.email,
-                "password": true
+            body: {
+                "name": user.name,
+                "username" : user.username,
+                "email" : user.email,
+                "password" : user.password
             },
             'auth-token': token
         })
