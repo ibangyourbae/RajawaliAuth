@@ -5,7 +5,7 @@ const { Schema } = require('mongoose')
 // Register Validation
 const registerValidation = (data) =>{
     const schema = Joi.object({
-        name: Joi.string().max(255).equired(),
+        name: Joi.string().max(255).required(),
         username: Joi.string().required(),
         email: Joi.string().required().email(),
         password: Joi.string().min(8).max(24).required()
