@@ -14,18 +14,18 @@ router.post('/register',async(req,res) => {
     // VALIDATE USER DATA
 
     const {error} = registerValidation(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(200).send(error.details[0].message)
 
     // Checking if the user is already in the database
     const emailExist = await User.findOne({email:req.body.email})
-    if(emailExist) return res.status(400).send({
+    if(emailExist) return res.status(200).send({
         "message": "email already exist",
         "code" : -1
     })
 
     // checking if the username is already in the database
     const usernameExist = await User.findOne({username:req.body.username})
-    if(usernameExist) return res.status(400).send({
+    if(usernameExist) return res.status(200).send({
         "message": "username already exist",
         "code" : -1
     }) 
@@ -57,7 +57,7 @@ router.post('/register',async(req,res) => {
 
         })
     }catch(err){
-        res.status(400).send(err)
+        res.status(200).send(err)
         res.send({
             "code": -1
         })
@@ -71,26 +71,26 @@ router.post('/login', async(req,res) =>{
     
     
     const {error} = loginValidation(req.body)
-    if(error) return res.status(400).send(error.details[0].message, ({
+    if(error) return res.status(200).send(error.details[0].message, ({
         "code": -1
     }))
  
         // Checking if the email exists
         const user = await User.findOne({email: req.body.email})
-        if(!user) return res.status(400).send({
+        if(!user) return res.status(200).send({
             "message": 'Email is not found',
             "code" : -1
         })
         // PASSWORD IS CORRECT
         const validPass = await bcrypt.compare(req.body.password, user.password )
-        if(!validPass) return res.status(400).send({
+        if(!validPass) return res.status(200).send({
             "message": 'Invalid Password',
             "code": -1
         })
 
         // PASSWORD CONFIRMATION
         const confirmPass = await bcrypt.compare(req.body.password, user.password)
-        if(!confirmPass) return res.status(400).send({
+        if(!confirmPass) return res.status(200).send({
             "message": 'Password is not same',
             "code": -1
         })
