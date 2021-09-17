@@ -7,6 +7,10 @@ const User = require('../model/User')
 const {registerValidation, loginValidation} = require('../routes/validation')
 const { has } = require('@hapi/joi/lib/types/array')
 const { valid } = require('@hapi/joi')
+const cors = require('cors')
+
+// Middleware
+
 
 // REGISTER
 router.post('/register',async(req,res) => {

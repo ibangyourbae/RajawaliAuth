@@ -22,11 +22,13 @@ mongoose.connect(process.env.DB_CONNECT,
 // Middleware
 app.use(express.json())
 app.use(cors())
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+app.use((req,res,next)=>{
+  res.setHeader('Acces-Control-Allow-Origin','*');
+  res.setHeader('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Acces-Contorl-Allow-Methods','Content-Type','Authorization');
+  next(); 
+})
+
 // Route Middlewares
 
 app.use('/api/user', authRoute)
