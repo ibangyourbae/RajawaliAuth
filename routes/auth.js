@@ -4,12 +4,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { route } = require('express/lib/application')
 const User = require('../model/User')
-const {registerValidation, loginValidation} = require('../routes/validation')
+const {registerValidation, loginValidation} = require('../validation')
 const { has } = require('@hapi/joi/lib/types/array')
 const { valid } = require('@hapi/joi')
 const cors = require('cors')
-
-// Middleware
 
 
 // REGISTER
