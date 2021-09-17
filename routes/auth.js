@@ -1,6 +1,8 @@
 const router = require('express').Router()
 // const bcrypt = require('bcryptjs/dist/bcrypt')
 const bcrypt = require('bcryptjs')
+const express = require('express')
+const app = express()
 const jwt = require('jsonwebtoken')
 const { route } = require('express/lib/application')
 const User = require('../model/User')
@@ -9,6 +11,15 @@ const { has } = require('@hapi/joi/lib/types/array')
 const { valid } = require('@hapi/joi')
 const cors = require('cors')
 
+
+// Middleware
+app.use(express.json())
+app.use(cors())
+app.use((req,res,next)=>{
+  res.setHeader('Acces-Control-Allow-Origin','*');
+  res.setHeader('Acces-Control-Allow-Methods','*');
+  next(); 
+})
 
 // REGISTER
 router.post('/register',async(req,res) => {
@@ -113,8 +124,6 @@ router.post('/login', async(req,res) =>{
             "code": 1
         })
               
-
-
         console.log('Logged in')
 })
 module.exports = router
