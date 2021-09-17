@@ -18,11 +18,17 @@ router.post('/register',async(req,res) => {
 
     // Checking if the user is already in the database
     const emailExist = await User.findOne({email:req.body.email})
-    if(emailExist) return res.status(400).send('Email already exists')
+    if(emailExist) return res.status(400).send({
+        "message": "email already exist",
+        "code" : -1
+    })
 
     // checking if the username is already in the database
     const usernameExist = await User.findOne({username:req.body.username})
-    if(usernameExist) return res.status(400).send('Username already exists') 
+    if(usernameExist) return res.status(400).send({
+        "message": "username already exist",
+        "code" : -1
+    }) 
 
     // Hash passwords
     const salt = await bcrypt.genSalt(10)
@@ -52,7 +58,9 @@ router.post('/register',async(req,res) => {
         })
     }catch(err){
         res.status(400).send(err)
-        res.send("code : -1")
+        res.send({
+            "code": -1
+        })
     }
 })
 
