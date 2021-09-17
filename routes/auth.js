@@ -41,6 +41,12 @@ router.post('/register',async(req,res) => {
         res.send({
             user: user._id,
             "message": "Register user berhasil",
+            body: {
+                "name": user.name,
+                "username" : user.username,
+                "email" : user.email,
+                "password" : true
+            },
             "code" : 1
 
         })
