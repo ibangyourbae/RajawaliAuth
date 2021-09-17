@@ -41,16 +41,12 @@ router.post('/register',async(req,res) => {
         res.send({
             user: user._id,
             "message": "Register user berhasil",
-            body:{
-                "name": req.body.name,
-                "username": req.body.username,
-                "email": req.body.email,
-                "password": hashedPassword
-            }
+            "code" : 1
 
         })
     }catch(err){
         res.status(400).send(err)
+        res.send("code : -1")
     }
 })
 
@@ -61,7 +57,9 @@ router.post('/login', async(req,res) =>{
     
     
     const {error} = loginValidation(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).send(error.details[0].message, ({
+        "code": -1
+    }))
  
         // Checking if the email exists
         const user = await User.findOne({email: req.body.email})
@@ -84,9 +82,10 @@ router.post('/login', async(req,res) =>{
                 "name": user.name,
                 "username" : user.username,
                 "email" : user.email,
-                "password" : user.password
+                "password" : true
             },
-            'auth-token': token
+            'auth-token': token,
+            "code": 1
         })
               
 
