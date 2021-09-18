@@ -12,7 +12,7 @@ const cors = require('cors')
 
 //
 // REGISTER
-router.post('/register',async(req,res,next) => {
+router.post('/register',async(req,res) => {
 
     // VALIDATE USER DATA
 
@@ -68,7 +68,7 @@ router.post('/register',async(req,res,next) => {
 })
 
 // LOGIN
-router.post('/login', async(req,res,next) =>{
+router.post('/login', async(req,res) =>{
 
     // VALIDATE USER DATA
     
