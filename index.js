@@ -34,12 +34,12 @@ mongoose.connect(process.env.DB_CONNECT,
 // Middleware
 app.use(express.json())
 app.use(cors())
-app.use((req,res,next)=>{
+app.use((req,res)=>{
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Access-Control-Allow-Methods','GET','POST','PUT','PATCH','DELETE');
   res.setHeader('Access-Control-Allow-Headers','X-PINGOTHER','Content-Type')
   res.setHeader('Access-Control-Max-Age','86400')
-  next(); 
+  
 })
 // implement cors here
 // app.use(cors(corsOptions))
