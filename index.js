@@ -21,12 +21,12 @@ mongoose.connect(process.env.DB_CONNECT,
 
 // Middleware
 app.use(express.json())
-// app.use(cors())
-// app.use((req,res,next)=>{
-//   res.setHeader('Acces-Control-Allow-Origin','*');
-//   res.setHeader('Acces-Control-Allow-Methods','*');
-//   next(); 
-// })
+app.use(cors())
+app.use((req,res,next)=>{
+  res.setHeader('Acces-Control-Allow-Origin','*');
+  res.setHeader('Acces-Control-Allow-Methods','*');
+  next(); 
+})
 
 // Route Middlewares
 
