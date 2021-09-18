@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use(express.json())
 app.use(cors())
 app.use((req,res,next)=>{
-  res.setHeader('Acces-Control-Allow-Origin','https://platform-pejabat.vercel.app/');
+  res.setHeader('Acces-Control-Allow-Origin','https://platform-pejabat.vercel.app/#/register','https://platform-pejabat.vercel.app/#/login');
   res.setHeader('Acces-Control-Allow-Methods','GET','POST','PUT','PATCH','DELETE');
   next(); 
 })
