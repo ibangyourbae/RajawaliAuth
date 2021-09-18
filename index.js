@@ -39,7 +39,8 @@ app.use(express.json())
 //   res.setHeader('Access-Control-Allow-Methods','GET','POST','PUT','PATCH','DELETE');
 //   next(); 
 // })
-
+// implement cors here
+app.use(cors(corsOptions))
 // Route Middlewares
 
 app.use('/api/user', authRoute)
