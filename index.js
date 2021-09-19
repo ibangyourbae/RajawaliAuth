@@ -33,14 +33,25 @@ mongoose.connect(process.env.DB_CONNECT,
 
 // Middleware
 app.use(express.json())
-app.use(cors())
-app.use((req,res)=>{
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET','POST','PUT','PATCH','DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-PINGOTHER','Content-Type')
-  res.setHeader('Access-Control-Max-Age','86400')
+var whitelist = ['https://platform-pejabat.vercel.app', 'http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions))
+// app.use(cors())
+// app.use((req,res,next)=>{
+//   res.setHeader('Access-Control-Allow-Origin','*');
+//   res.setHeader('Access-Control-Allow-Methods','GET','POST','PUT','PATCH','DELETE');
+//   next()
   
-})
+// })
+
 // implement cors here
 // app.use(cors(corsOptions))
 // Route Middlewares
