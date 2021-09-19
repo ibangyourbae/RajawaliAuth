@@ -43,7 +43,7 @@ var corsOptions = {
     }
   }
 }
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 // app.use(cors())
 // app.use((req,res,next)=>{
 //   res.setHeader('Access-Control-Allow-Origin','*');
@@ -56,8 +56,9 @@ app.use(cors(corsOptions))
 // app.use(cors(corsOptions))
 // Route Middlewares
 
-app.use('/api/user', authRoute)
+app.use('/api/user', cors(corsOptions),authRoute)
 app.use('/api/posts', postRoute)
+
 
 app.listen(PORT, () => console.log('Server Up and running '))
 
