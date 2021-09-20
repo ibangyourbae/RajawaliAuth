@@ -33,7 +33,7 @@ mongoose.connect(process.env.DB_CONNECT,
 
 // Middleware
 app.use(express.json())
-var whitelist = ['https://platform-pejabat.vercel.app', 'http://localhost:3000','http://localhost:8080']
+var whitelist = ['https://platform-pejabat.vercel.app', 'http://localhost:3000','http://localhost:8080','https://www.postman.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
