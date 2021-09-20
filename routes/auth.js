@@ -13,7 +13,7 @@ const cors = require("cors");
 // REGISTER
 router.post("/register", async (req, res) => {
   // VALIDATE USER DATA
-  try {
+  
       console.log(req.body)
     const { error } = registerValidation(req.body);
     if (error) return res.status(200).send(error.details[0].message);
@@ -45,7 +45,8 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
-
+    
+    try {
     const savedUser = await user.save();
     res.send({
       user: user._id,
